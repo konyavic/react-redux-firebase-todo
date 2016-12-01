@@ -18,7 +18,20 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  foo: 123
+  data: [
+    {
+      title: "仕事する",
+      isDone: true,
+    },
+    {
+      title: "アドベントカレンダーを書く",
+      isDone: false,
+    },
+    {
+      title: "寝る",
+      isDone: false,
+    },
+  ]
 })
 
 export let SandboxTodoView = connect(mapStateToProps, mapDispatchToProps)(TodoView)
