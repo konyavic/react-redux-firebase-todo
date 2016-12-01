@@ -1,8 +1,5 @@
 import React from 'react'
-
-const TodoView = (props) => <div>
-  foo: {props.foo}
-</div>
+import TodoView from './TodoView'
 
 const TodoAuth = (props) => <div>
   <button onClick={props.doAuth}>auth</button>
