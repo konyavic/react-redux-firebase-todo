@@ -7,7 +7,7 @@ const TodoView = (props) => <div>
         <li key={i} style={{
           textDecoration: todo.isDone ? "line-through" : "none"
         }}>
-          <input type="checkbox" checked={todo.isDone} /> 
+          <input type="checkbox" checked={todo.isDone} onChange={() => props.onChange(i)}/> 
           {todo.title}
         </li>
       ))
