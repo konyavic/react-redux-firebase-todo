@@ -1,10 +1,18 @@
 import React from 'react'
 
-export const Todo = (props) => (
-  <div style={{ margin: '0 auto' }} >
-    <h2>Todo</h2>
-  </div>
-)
+export class Todo extends React.Component {
+  componentDidMount() {
+    this.props.didMount()
+  }
+
+  render() {
+    let props = this.props
+    return <div style={{ margin: '0 auto' }} >
+      <h2>Todo</h2>
+      foo: {props.foo}
+    </div>
+  }
+}
 
 Todo.propTypes = {
 }

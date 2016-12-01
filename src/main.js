@@ -1,7 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import firebase from 'firebase'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBd35GJy6dmYDYWTD9Vc_ciUgjbY8FnRj4",
+  authDomain: "todo-fe31f.firebaseapp.com",
+  databaseURL: "https://todo-fe31f.firebaseio.com",
+  storageBucket: "todo-fe31f.appspot.com",
+  messagingSenderId: "831088925590"
+};
+firebase.initializeApp(config);
 
 // ========================================================
 // Store Instantiation
