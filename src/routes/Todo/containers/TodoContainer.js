@@ -13,7 +13,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   isAuth: state.todo.isAuth,
-  foo: state.todo.foo,
+  todos: state.todo.todos,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todo)

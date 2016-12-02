@@ -10,17 +10,19 @@ import firebase from 'firebase'
 
 export function didMount() {
   return (dispatch, getState) => {
+    if (getState().todo.isAuth) {
+      return
+    }
     firebase.auth().onAuthStateChanged(user => {
       if (!user) {
         return
       }
       dispatch({type: "AUTH_OK"})
-      firebase.database().ref("foo").set("bar").then(() => {
-        firebase.database().ref("foo").once('value').then(data => {
-          dispatch({
-            type: "FOO_SET",
-            payload: data.val(),
-          })
+      firebase.database().ref("todo").on("child_added", data => {
+        let todo = data.val()
+        dispatch({
+          type: "TASK_ADDED",
+          payload: todo
         })
       })
     })
@@ -41,8 +43,13 @@ const ACTION_HANDLERS = {
   ["AUTH_OK"]: (state, action) => {
     return Object.assign({}, state, {isAuth: true})
   },
-  ["FOO_SET"]: (state, action) => {
-    return Object.assign({}, state, {foo: action.payload})
+  ["TASK_ADDED"]: (state, action) => {
+    return Object.assign({}, state, {
+      todos: [].concat(state.todos).concat([{
+        title: action.payload.title,
+        isDone: action.payload.is_done
+      }])
+    })
   },
 }
 
@@ -51,7 +58,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = {
   isAuth: false,
-  foo: null
+  todos: [],
 }
 export default function todoReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
