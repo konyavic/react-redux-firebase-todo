@@ -15,7 +15,7 @@ export class Todo extends React.Component {
     return <div style={{ margin: '0 auto' }} >
       <h2>Todo</h2>
       {
-        props.isAuth ? <TodoView data={props.todos} /> : <TodoAuth doAuth={props.doAuth}/>
+        props.isAuth ? <TodoView data={props.todos} onChange={props.handleToggleTodo}/> : <TodoAuth doAuth={props.doAuth}/>
       }
     </div>
   }
