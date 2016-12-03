@@ -53,6 +53,26 @@ export function handleToggleTodo(i) {
   }
 }
 
+export function handleInputText(e) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: "TASK_INPUTED",
+      payload: e.target.value,
+    })
+  }
+}
+
+export function addTodo(e) {
+  e.preventDefault()
+  return (dispatch, getState) => {
+    console.log(getState())
+    firebase.database().ref("todo").push({
+      title: getState().todo.inputTodo,
+      is_done: false,
+    })
+  }
+}
+
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
@@ -87,6 +107,11 @@ const ACTION_HANDLERS = {
       todos: todos
     })
   },
+  ["TASK_INPUTED"]: (state, action) => {
+    return Object.assign({}, state, {
+      inputTodo: action.payload
+    })
+  },
 }
 
 // ------------------------------------
@@ -95,6 +120,7 @@ const ACTION_HANDLERS = {
 const initialState = {
   isAuth: false,
   todos: [],
+  inputTodo: "",
 }
 export default function todoReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

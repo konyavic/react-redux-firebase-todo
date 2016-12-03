@@ -17,6 +17,10 @@ export class Todo extends React.Component {
       {
         props.isAuth ? <TodoView data={props.todos} onChange={props.handleToggleTodo}/> : <TodoAuth doAuth={props.doAuth}/>
       }
+      <form>
+        <input type="text" value={props.inputTodo} onChange={props.handleInputText} />
+        <input type="button" value="追加" onClick={props.addTodo}/>
+      </form>
     </div>
   }
 }
